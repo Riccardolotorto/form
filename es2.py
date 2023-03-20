@@ -8,18 +8,21 @@ def home():
 
 @app.route('/login', methods = ['GET'])
 def login():
-    pesoUtente = request.args.get('peso')
-    altezzaUtente = request.args.get('altezza')
-    IMC = int(pesoUtente) / (int(altezzaUtente) * int(altezzaUtente))
+    pesoUtente = int(request.args.get('peso'))
+    altezzaUtente = int(request.args.get('altezza'))
+    IMC = pesoUtente / ((altezzaUtente / 100) ** 2)
     if IMC < 20:
         risultato = "Sottopeso"
-        return render_template("login2.html", situazione = risultato)
+        foto = "static/images/mc.jpg"
+        return render_template("login2.html", situazione = risultato, directory = foto)
     elif IMC >= 20 and IMC <= 30:
+        foto = "static/images/pasta.jpg"
         risultato = "normopeso"
-        return render_template("login2.html", situazione = risultato)
+        return render_template("login2.html", situazione = risultato, directory = foto)
     elif IMC > 30:
         risultato = "sovrappeso"
-        return render_template("login2.html", situazione = risultato)
+        foto = "static/images/insalata.jpg"
+        return render_template("login2.html", situazione = risultato, directory = foto)
         
 
 if __name__ == '__main__':
