@@ -3,18 +3,14 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template("form.html")
+    return render_template("formPost.html")
 
-@app.route('/controlla')
-def controlla():
-    return ("<h1>Pagina di controllo</h1>")
-
-@app.route('/login', methods = ['GET'])
+@app.route('/login', methods = ['POST'])
 def login():
-    nomeUtente = request.args.get('nome')
-    passwordUtente = request.args.get('password')
+    nomeUtente = request.form["nome"]
+    passwordUtente = request.form["password"]
     if nomeUtente == "admin" and passwordUtente == "xxx123#":
-        return render_template("login.html", nome = nomeUtente, password = passwordUtente)
+        return render_template("loginPost.html", nome = nomeUtente)
     else:
         return render_template("errore.html", password = passwordUtente)
 
