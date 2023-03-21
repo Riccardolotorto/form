@@ -10,16 +10,16 @@ def home():
 def login():
     pesoUtente = int(request.args.get('peso'))
     altezzaUtente = int(request.args.get('altezza'))
-    IMC = pesoUtente / ((altezzaUtente / 100) ** 2)
-    if IMC < 20:
+    IMC = pesoUtente // ((altezzaUtente / 100) ** 2)
+    if IMC < 18:
         risultato = "Sottopeso"
         foto = "static/images/mc.jpg"
         return render_template("login2.html", situazione = risultato, directory = foto)
-    elif IMC >= 20 and IMC <= 30:
+    elif IMC >= 18 and IMC <= 24:
         foto = "static/images/pasta.jpg"
         risultato = "normopeso"
         return render_template("login2.html", situazione = risultato, directory = foto)
-    elif IMC > 30:
+    elif IMC >= 25:
         risultato = "sovrappeso"
         foto = "static/images/insalata.jpg"
         return render_template("login2.html", situazione = risultato, directory = foto)
